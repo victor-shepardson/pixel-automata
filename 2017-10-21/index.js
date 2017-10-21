@@ -172,21 +172,23 @@ const drawFeedback = regl({
   void main () {
     float ff = 1.75; //
     float fb = -1.; //
-    float fg = 0.05; //0.005; //
+    float fsv = 0.05; //0.05; //
     float m = 0.005; //0.1; //
-    float octaves = (1.-cos(pi*t/100.))*1.;//1.; //(sin(pi*t/4.)+sin(pi*t/8.)+2.)/2.;
+    float octaves = (1.-cos(pi*t/100.))*1.;//1.;
     vec2 uv = gl_FragCoord.xy;
-    vec3 g = sin(vec3(1.,2.,1.)*pi*uv.yyx/size.yyx)-1.;
-    vec3 c0 = samp(uv);
-    vec3 c1 = samp(uv+=pow(2.,c0.r*octaves)*cos(2.*pi*vec2(c0.g, c0.g+0.25)));
-    vec3 c = ninept(uv, pow(2., c1.b*octaves));
-    c = fract(ff*c + fb*c1 + fg*g);
-    c = color_mid2min_broken(c);
-    // c = color_normalize(c);
-    c = mix(c1, c, m);
-    gl_FragColor = vec4(
-      c,
-      1.);
+    vec3 sv = sin(vec3(1.,2.,1.)*pi*uv.yyx/size.yyx)-1.;
+    vec3 c = vec3(0.);//(sv*.5+1.)*1.;
+    if (t>.5){
+      vec3 c0 = samp(uv);
+      vec3 c1 = samp(uv+=pow(2.,c0.b*octaves)*cos(2.*pi*vec2(c0.g-0.25, c0.g)));
+      c = ninept(uv, pow(2., c0.r*octaves));
+      c = fract(ff*c + fb*c1 + fsv*sv);
+      // c = color_mid2min_broken(c);
+      c = color_mid2min(c);
+      // c = color_normalize(c);
+      c = mix(c1, c, m);
+    }
+    gl_FragColor = vec4(c, 1.);
   }`,
 
   vert: `
