@@ -1,18 +1,18 @@
 {
   "name": "regl-project",
-  "version": "1.0.0",
+  "version": "17.10.21",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "budo index.js --open --live --host localhost -- -t es2040",
-    "build": "browserify index.js -t es2040 | indexhtmlify > index.html"
+    "build": "for dir in */; do cd $dir; if [ -e index.js ]; then browserify index.js -t es2040 | indexhtmlify > index.html; fi; cd ..; done"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/victor-shepardson/regl-project.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Victor Shepardson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/victor-shepardson/regl-project/issues"
