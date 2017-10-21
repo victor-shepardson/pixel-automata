@@ -180,11 +180,11 @@ const drawFeedback = regl({
     vec3 c = vec3(0.);//(sv*.5+1.)*1.;
     if (t>.5){
       vec3 c0 = samp(uv);
-      vec3 c1 = samp(uv+=pow(2.,c0.r*octaves)*cos(2.*pi*vec2(c0.g-0.25, c0.g)));
+      vec3 c1 = samp(uv+=pow(2.,c0.r*octaves)*cos(2.*pi*vec2(c0.g, c0.g+0.25)));
       c = ninept(uv, pow(2., c1.b*octaves));
       c = fract(ff*c + fb*c1 + fsv*sv);
-      // c = color_mid2min_broken(c);
-      c = color_mid2min(c);
+      c = color_mid2min_broken(c);
+      // c = color_mid2min(c);
       // c = color_normalize(c);
       c = mix(c1, c, m);
     }
