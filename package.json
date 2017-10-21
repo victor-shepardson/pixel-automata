@@ -1,5 +1,5 @@
 {
-  "name": "regl-project",
+  "name": "pixel-automata",
   "version": "17.10.21",
   "description": "",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victor-shepardson/regl-project.git"
+    "url": "git+https://github.com/victor-shepardson/pixel-automata.git"
   },
   "keywords": [],
   "author": "Victor Shepardson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/victor-shepardson/regl-project/issues"
+    "url": "https://github.com/victor-shepardson/pixel-automata/issues"
   },
-  "homepage": "https://github.com/victor-shepardson/regl-project#readme",
+  "homepage": "https://github.com/victor-shepardson/pixel-automata#readme",
   "devDependencies": {
     "browserify": "^14.4.0",
     "budo": "^10.0.4",
