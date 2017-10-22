@@ -72,9 +72,9 @@ const drawFeedback = regl({
   void main () {
     float ff = 1.75; //
     float fb = -1.; //
-    float fsv = 0.07; //
-    float m = 0.006; //
-    float octaves = (1.-cos(pi*t/100.))*.5*2.; //1.0; //
+    float fsv = .05; //0.07; //
+    float m = .005; //0.006; //
+    float octaves = (1.-cos(pi*t/100.))*.5; //1.0; //
     vec2 uv = gl_FragCoord.xy;
     vec3 sv = sin(vec3(1.,2.,1.)*pi*uv.yyx/size.yyx)-1.;
     vec3 c = vec3(0.); //(sv*.5+1.)*1.;
