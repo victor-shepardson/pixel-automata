@@ -30,7 +30,11 @@ const drawFeedback = regl({
     vec3 d_n = (n-mu)*(n-mu);
     vec3 d_s = (s-mu)*(s-mu);
     vec3 sigma = sqrt(d_e+d_w+d_n+d_s)/2.;
-    return mu.gbr/(1.+sigma);
+    // return mu.gbr/(1.+sigma);
+    // return mu.gbr*(1.+sigma);
+    // return mu.gbr*(sigma.r-sigma.g+sigma.b+1.);
+    // return (mu/(sigma.gbr+1.)).gbr;
+    return ((samp(uv)-mu)*(sigma.gbr+.5)+mu).gbr;
   }
   vec3 eightpt(vec2 uv, float d){
     const vec3 p = vec3(1.,-1.,0.);
@@ -181,7 +185,8 @@ const drawFeedback = regl({
     if (t>.5){
       vec3 c0 = samp(uv);
       vec3 c1 = samp(uv+=pow(2.,c0.r*octaves)*cos(2.*pi*vec2(c0.g, c0.g+0.25)));
-      c = ninept(uv, pow(2., c1.b*octaves));
+      // c = ninept(uv, pow(2., c1.b*octaves));
+      c = fourpt(uv, pow(2., c1.b*octaves));
       c = fract(ff*c + fb*c1 + fsv*sv);
       c = color_mid2min_broken(c);
       // c = color_mid2min(c);
