@@ -32,7 +32,7 @@ const drawFeedback = regl({
     vec3 d_n = (n-mu)*(n-mu);
     vec3 d_s = (s-mu)*(s-mu);
     vec3 sigma = sqrt(d_e+d_w+d_n+d_s)/3.;
-    return (samp(uv)-mu)*(sigma*1.5+.5)+mu;
+    return (samp(uv)-mu)*(sigma.gbr*1.5+.5)+mu;
   }
   vec3 color_mid2min_broken(vec3 x){
     // (for nonnegative x) adds mid to max channel and zeros mid channel
@@ -72,9 +72,9 @@ const drawFeedback = regl({
   void main () {
     float ff = 1.75; //
     float fb = -1.; //
-    float fsv = 0.05; //
-    float m = 0.005; //
-    float octaves = (1.-cos(pi*t/100.))*.5; //1.0; //
+    float fsv = 0.07; //
+    float m = 0.006; //
+    float octaves = (1.-cos(pi*t/100.))*.5*2.; //1.0; //
     vec2 uv = gl_FragCoord.xy;
     vec3 sv = sin(vec3(1.,2.,1.)*pi*uv.yyx/size.yyx)-1.;
     vec3 c = vec3(0.); //(sv*.5+1.)*1.;
